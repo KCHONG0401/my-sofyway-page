@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创想视界 - 全能设计师素材宝库</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
+
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-main: #1f2937;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(255, 255, 255, 0.3);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --accent-color: #2563eb;
+        }
+
+        [data-theme='dark'] {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --text-main: #f3f4f6;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(15, 23, 42, 0.9);
+            --accent-color: #60a5fa;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            transition: all 0.5s ease;
+            background-attachment: fixed;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+        }
+
+        /* 核心列表样式 (模仿图1) */
+        .list-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 1.5rem 0;
+        }
+        [data-theme='dark'] .list-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .list-item:last-child { border-bottom: none; }
+
+        .resource-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 500;
+        }
+        .resource-link:hover { text-decoration: underline; opacity: 0.8; }
+
+        /* 导航栏样式 */
+        .nav-scroll {
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+        .nav-scroll::-webkit-scrollbar { display: none; }
+
+        .category-title {
+            border-left: 6px solid var(--accent-color);
+            padding-left: 1.2rem;
+            margin: 4rem 0 1.5rem 0;
+            font-weight: 900;
+            font-size: 2rem;
+            letter-spacing: -0.025em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 top-0 px-4 py-3 shadow-md glass-card border-none rounded-none">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2 mr-4 min-w-fit">
+                <img src="logo.png" alt="Logo" class="h-8 w-auto">
+                <span class="font-black text-lg">创想视界</span>
+            </div>
+            <div class="nav-scroll flex space-x-6 text-sm font-bold opacity-80">
+                <a href="#soft" class="hover:text-blue-500">1.软件类</a>
+                <a href="#font" class="hover:text-blue-500">2.字体类</a>
+                <a href="#plug" class="hover:text-blue-500">3.插件大全</a>
+                <a href="#color" class="hover:text-blue-500">4.配色类</a>
+                <a href="#site" class="hover:text-blue-500">5.设计网站</a>
+                <a href="#brush" class="hover:text-blue-500">6.插画笔刷</a>
+                <a href="#asset" class="hover:text-blue-500">7.设计素材</a>
+                <a href="#c4d" class="hover:text-blue-500">8.C4D素材</a>
+                <a href="#mock" class="hover:text-blue-500">9.超级样机</a>
+                <a href="#port" class="hover:text-blue-500">10.作品集</a>
+                <a href="#cdr" class="hover:text-blue-500">11.CDR软件</a>
+            </div>
+            <div id="theme-toggle" class="cursor-pointer ml-4 p-2 bg-blue-600 text-white rounded-xl shadow-lg">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部区域 (图2风格) -->
+    <header class="pt-36 pb-12 px-6 text-center">
+        <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+            灵感，触手可及
+        </h1>
+        <p class="text-xl opacity-60 max-w-2xl mx-auto mb-10">
+            创想视界：全网最全设计资源实时更新，一站式解决素材需求。
+        </p>
+        
+        <!-- 安全提示 -->
+        <div class="max-w-4xl mx-auto bg-red-500/10 border border-red-500/20 p-6 rounded-3xl flex items-center text-left mb-16 shadow-sm">
+            <i class="fas fa-shield-alt text-red-500 text-3xl mr-5"></i>
+            <div class="text-sm text-red-700 leading-relaxed">
+                <strong>安全警示：</strong> 凡是主动加你好友自称“小助理”要钱的都是骗子！请务必通过官方渠道学习，谨防受骗。
+            </div>
+        </div>
+
+        <!-- 3个核心软件大卡片 (图2风格) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
+            <div class="glass-card p-10 flex flex-col items-center shadow-xl hover:scale-105 transition-transform">
+                <img src="ps.png" alt="PS" class="w-20 h-20 mb-6 object-contain">
+                <h3 class="font-extrabold text-2xl mb-2">Photoshop 2025</h3>
+                <span class="px-4 py-1 bg-blue-500/20 text-blue-600 rounded-full text-xs font-black mb-6">WIN 最新系统</span>
+                <a href="https://pan.baidu.com/s/1eCA19BGujlWrwvytw-I-yg?pwd=tang" target="_blank" class="bg-blue-600 text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-blue-600/30">立即获取</a>
+            </div>
+            <div class="glass-card p-10 flex flex-col items-center shadow-xl hover:scale-105 transition-transform">
+                <img src="ai.png" alt="AI" class="w-20 h-20 mb-6 object-contain">
+                <h3 class="font-extrabold text-2xl mb-2">Illustrator 2025</h3>
+                <span class="px-4 py-1 bg-orange-500/20 text-orange-600 rounded-full text-xs font-black mb-6">WIN 最新系统</span>
+                <a href="https://pan.baidu.com/s/1Sv4EZj8q4uy3H9MgSTUwRQ?pwd=tang" target="_blank" class="bg-orange-600 text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-orange-600/30">立即获取</a>
+            </div>
+            <div class="glass-card p-10 flex flex-col items-center shadow-xl hover:scale-105 transition-transform border-dashed border-2 border-indigo-400">
+                <img src="tool.png" alt="Tool" class="w-20 h-20 mb-6 object-contain">
+                <h3 class="font-extrabold text-2xl mb-2">Upscay 图片变清晰</h3>
+                <span class="px-4 py-1 bg-purple-500/20 text-purple-600 rounded-full text-xs font-black mb-6">AI 无损放大</span>
+                <a href="https://pan.baidu.com/s/1OW3DtJAqrHMOyex2m_0H2w?pwd=tang" target="_blank" class="bg-indigo-600 text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-indigo-600/30">立即下载</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 垂直全量列表区 (图1风格) -->
+    <main class="max-w-7xl mx-auto px-6 pb-32">
+
+        <!-- 1.软件类 -->
+        <section id="soft">
+            <h2 class="category-title">1.1 核心软件工具类</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ PS 2025（win 系统）</p>
+                    <a href="https://pan.baidu.com/s/1eCA19BGujlWrwvytw-I-yg?pwd=tang" target="_blank" class="resource-link text-lg">https://pan.baidu.com/s/1eCA19BGujlWrwvytw-I-yg?pwd=tang</a>
+                    <p class="text-sm font-bold opacity-60 mt-2">提取码：tang</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ AI 2025（win 系统）</p>
+                    <a href="https://pan.baidu.com/s/1Sv4EZj8q4uy3H9MgSTUwRQ?pwd=tang" target="_blank" class="resource-link text-lg">https://pan.baidu.com/s/1Sv4EZj8q4uy3H9MgSTUwRQ?pwd=tang</a>
+                    <p class="text-sm font-bold opacity-60 mt-2">提取码：tang</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 位图转矢量图软件</p>
+                    <a href="https://pan.baidu.com/s/1vVKOLTse7OSgNQFGMFnfgw?pwd=tang" target="_blank" class="resource-link text-lg">https://pan.baidu.com/s/1vVKOLTse7OSgNQFGMFnfgw?pwd=tang</a>
+                    <p class="text-sm font-bold opacity-60 mt-2">提取码：tang</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ PS2018-2024 各个版本软件操作教程</p>
+                    <a href="https://pan.baidu.com/s/1uYVcv6VdXzFAj1KYNCySQA?pwd=tang" target="_blank" class="resource-link text-lg">https://pan.baidu.com/s/1uYVcv6VdXzFAj1KYNCySQA?pwd=tang</a>
+                    <p class="text-sm font-bold opacity-60 mt-2">提取码：tang</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ PS2024 安装包（win 系统 / mac 系统）</p>
+                    <p class="text-sm">WIN：<a href="https://pan.baidu.com/s/1X7kTPbxW2KEfAfB4q8aIEQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1X7kTPbxW2KEfAfB4q8aIEQ</a></p>
+                    <p class="text-sm mt-1">MAC：<a href="https://pan.baidu.com/s/1EfsD0PIemWh--SbFn0PMNg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1EfsD0PIemWh--SbFn0PMNg</a></p>
+                    <p class="text-xs opacity-50">提取码：tang</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ Ai2024 安装包（win / mac 系统）</p>
+                    <p class="text-sm">WIN：<a href="https://pan.baidu.com/s/1IiBfm4RdGQuqqxxcap8dkQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1IiBfm4RdGQuqqxxcap8dkQ</a></p>
+                    <p class="text-sm mt-1">MAC：<a href="https://pan.baidu.com/s/1hyicp3_QXjnUbfbLot6UMw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1hyicp3_QXjnUbfbLot6UMw</a></p>
+                    <p class="text-xs opacity-50">提取码：tang</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ Adobe 2022 / 2023 全家桶（win 系统）</p>
+                    <p class="text-sm">2023：<a href="https://pan.baidu.com/s/1tjyTndyLZq-9CB5Eg5EdZg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1tjyTndyLZq-9CB5Eg5EdZg</a></p>
+                    <p class="text-sm mt-1">2022：<a href="https://pan.baidu.com/s/1mnwcGWkzQ4GbLj9hMBr42g?pwd=tang" class="resource-link">https://pan.baidu.com/s/1mnwcGWkzQ4GbLj9hMBr42g</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 3Dmax 2020 安装包</p>
+                    <a href="https://pan.baidu.com/s/1QtgUo0ehEcgNgF_OLdK3Vg?pwd=tang" target="_blank" class="resource-link text-lg">https://pan.baidu.com/s/1QtgUo0ehEcgNgF_OLdK3Vg?pwd=tang</a>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ Adobe 全家桶安装连接（不限速）</p>
+                    <a href="https://superindex.yuque.com/fdnqs8/mcrzue?" target="_blank" class="resource-link text-lg">https://superindex.yuque.com/fdnqs8/mcrzue?</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2.字体类 -->
+        <section id="font">
+            <h2 class="category-title">1.2 精选设计字体类</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 300 款古风字体合集 / 中国风书法字体</p>
+                    <a href="https://pan.baidu.com/s/1wIOQmfvuN5UydJOkws4aIA?pwd=tang" class="resource-link">https://pan.baidu.com/s/1wIOQmfvuN5UydJOkws4aIA?pwd=tang</a>
+                    <p class="text-sm mt-2 font-bold">中国风版式：<a href="https://pan.baidu.com/s/1_aVhfPuLXxDdvuRh1sm9yw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1_aVhfPuLXxDdvuRh1sm9yw</a></p>
+                    <p class="text-xs opacity-50">提取码均为：tang</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 可商用字体库 / 自由商用字体</p>
+                    <a href="https://pan.baidu.com/s/1r51u8jEtg3mQKhNNDjCjRg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1r51u8jEtg3mQKhNNDjCjRg?pwd=tang</a>
+                    <p class="text-sm mt-1 font-bold">自由商用：<a href="https://pan.baidu.com/s/1NfcsdyF3tsDqZBIkVWQrlQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1NfcsdyF3tsDqZBIkVWQrlQ</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 特效字样机（立体字）</p>
+                    <p class="text-sm">①：<a href="https://pan.baidu.com/s/1kaJbPTa7vQMJDMvIveL5xA?pwd=tang" class="resource-link">https://pan.baidu.com/s/1kaJbPTa7vQMJDMvIveL5xA</a></p>
+                    <p class="text-sm mt-1">②：<a href="https://pan.baidu.com/s/1-cDTck6efWzDL8mrg0ergw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1-cDTck6efWzDL8mrg0ergw</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 小米字体 / 英文混排 / 氛围感字体</p>
+                    <p class="text-sm">小米：<a href="https://pan.baidu.com/s/19DZUrik5ncZUj17CU8v16w?pwd=tang" class="resource-link">https://pan.baidu.com/s/19DZUrik5ncZUj17CU8v16w</a></p>
+                    <p class="text-sm mt-1">英文：<a href="https://pan.baidu.com/s/1jl2acX0HAvjJmK3nFF9ZEQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1jl2acX0HAvjJmK3nFF9ZEQ</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3.插件大全 -->
+        <section id="plug">
+            <h2 class="category-title">1.3 PS/AI 插件脚本大全</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ ps 扩展管理器 (支持 2019-2025)</p>
+                    <a href="https://pan.baidu.com/s/1pHR7kP7ekGGXFAHUJDiCBw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1pHR7kP7ekGGXFAHUJDiCBw?pwd=tang</a>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ Ai 插件脚本合集 (①/②)</p>
+                    <p class="text-sm">①：<a href="https://pan.baidu.com/s/1_sDFmgHTTxXPmnk9bbPQZQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1_sDFmgHTTxXPmnk9bbPQZQ</a></p>
+                    <p class="text-sm mt-1">②：<a href="https://pan.baidu.com/s/1lHXQacEv-R3cYYsGmJwvNw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1lHXQacEv-R3cYYsGmJwvNw</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ PS 全套一键安装插件 / 自动磨皮 / 2.5D 转换</p>
+                    <p class="text-sm">一键：<a href="https://pan.baidu.com/s/1W1T9CUdl_gXXj24fIM9d9g?pwd=tang" class="resource-link">https://pan.baidu.com/s/1W1T9CUdl_gXXj24fIM9d9g</a></p>
+                    <p class="text-sm mt-1">磨皮：<a href="https://pan.baidu.com/s/1EtGlEZtYulbukatT5s-Bxw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1EtGlEZtYulbukatT5s-Bxw</a></p>
+                    <p class="text-sm mt-1">2.5D：<a href="https://pan.baidu.com/s/1uO5cQtcCnsx4Ekw1i29PhQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1uO5cQtcCnsx4Ekw1i29PhQ</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ PS 样机生成 / 光效 / 证件照 / 自定义形状</p>
+                    <p class="text-sm">样机：<a href="https://pan.baidu.com/s/1nggUNr5JLqFsMWA7WBIwfA?pwd=tang" class="resource-link">https://pan.baidu.com/s/1nggUNr5JLqFsMWA7WBIwfA</a></p>
+                    <p class="text-sm mt-1">光效：<a href="https://pan.baidu.com/s/1fDRflvf3KTVbjIC82V-1mQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1fDRflvf3KTVbjIC82V-1mQ</a></p>
+                    <p class="text-sm mt-1">证件照：<a href="https://pan.baidu.com/s/1efZ6l0pzqi6y1FBpQiNttg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1efZ6l0pzqi6y1FBpQiNttg</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4.配色类 -->
+        <section id="color">
+            <h2 class="category-title">1.4 艺术配色与渐变类</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 在线配色网站 / 配色神器</p>
+                    <p class="text-sm">网站：<a href="https://palettemaker.com/" class="resource-link">https://palettemaker.com/</a></p>
+                    <p class="text-sm mt-1">神器：<a href="https://colorsupplyyy.com/app/" class="resource-link">https://colorsupplyyy.com/app/</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ ps 渐变预设 / 200 款酸性渐变</p>
+                    <p class="text-sm">预设：<a href="https://pan.baidu.com/s/1EiELe4RnBFK2jYMOQZwhKg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1EiELe4RnBFK2jYMOQZwhKg</a></p>
+                    <p class="text-sm mt-1">酸性：<a href="https://pan.baidu.com/s/14paQda_hQXGesIRVAvMAow?pwd=tang" class="resource-link">https://pan.baidu.com/s/14paQda_hQXGesIRVAvMAow</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ Ai 色卡全集</p>
+                    <a href="https://pan.baidu.com/s/1c1BplW-B09xkN-GQtx1M6A?pwd=tang" class="resource-link">https://pan.baidu.com/s/1c1BplW-B09xkN-GQtx1M6A?pwd=tang</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5.设计师网站 (全量录入) -->
+        <section id="site">
+            <h2 class="category-title">1.5 全网设计师宝藏网站汇总</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 配色与灵感类网站</p>
+                    <p class="text-sm">渐变：<a href="https://webgradients.com/" class="resource-link">webgradients.com</a></p>
+                    <p class="text-sm mt-1">彩色渐变：<a href="https://uigradients.com/" class="resource-link">uigradients.com</a></p>
+                    <p class="text-sm mt-1">灵感中心：<a href="https://www.meiye.art/inspiration" class="resource-link">meiye.art</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 抠图/AI 处理/资源搜索</p>
+                    <p class="text-sm">AI 抠图：<a href="https://www.remove.bg/zh" class="resource-link">remove.bg/zh</a> | <a href="https://pixian.ai/" class="resource-link">pixian.ai</a></p>
+                    <p class="text-sm mt-1">AI 处理：<a href="https://clipdrop.co/" class="resource-link">clipdrop.co</a></p>
+                    <p class="text-sm mt-1">Yandex 图片搜：<a href="https://yandex.com/images/" class="resource-link">yandex.com/images</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 高清摄影图片/矢量素材汇总 (38 个网站)</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs opacity-80 mt-2">
+                        <p>Pexels: pexels.com</p>
+                        <p>Pixabay: pixabay.com</p>
+                        <p>Unsplash: unsplash.com</p>
+                        <p>Pngimg (免抠): pngimg.com</p>
+                        <p>Icons: dryicons.com / iconpark.oceanengine.com</p>
+                        <p>素材万能站: qijishow.com</p>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 设计师必玩游戏 & 练习网站</p>
+                    <p class="text-sm">钢笔工具：<a href="https://bezier.method.ac/" class="resource-link">bezier.method.ac</a></p>
+                    <p class="text-sm mt-1">布尔运算：<a href="https://boolean.method.ac/" class="resource-link">boolean.method.ac</a></p>
+                    <p class="text-sm mt-1">色感测试：<a href="https://game.ioxapp.com/eye-test/" class="resource-link">eye-test</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6.插画笔刷类 -->
+        <section id="brush">
+            <h2 class="category-title">1.6 插画设计与画笔笔刷类</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ PS 全套古风/水花/烟雾笔刷</p>
+                    <p class="text-sm">全套古风：<a href="https://pan.baidu.com/s/10ZIQ3CFtK-JSa7FKdjoPtQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/10ZIQ3CFtK-JSa7FKdjoPtQ</a></p>
+                    <p class="text-sm mt-1">水花：<a href="https://pan.baidu.com/s/1seI7MOiVcqMvOl_7ssfHzA?pwd=tang" class="resource-link">https://pan.baidu.com/s/1seI7MOiVcqMvOl_7ssfHzA</a></p>
+                    <p class="text-sm mt-1">烟雾：<a href="https://pan.baidu.com/s/1Nh8aXHksSXoniM5FApcrlQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1Nh8aXHksSXoniM5FApcrlQ</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ PS 光影/神仙笔刷/噪点/雷电/油彩</p>
+                    <p class="text-sm">光影：<a href="https://pan.baidu.com/s/1Ntzvq7KHsIQ40uGVri2OSQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1Ntzvq7KHsIQ40uGVri2OSQ</a></p>
+                    <p class="text-sm mt-1">神仙：<a href="https://pan.baidu.com/s/1Kms8jTsuM_5Mw4k2VFSwOw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1Kms8jTsuM_5Mw4k2VFSwOw</a></p>
+                    <p class="text-sm mt-1">噪点：<a href="https://pan.baidu.com/s/1R7EiOx6PRWtfNH42DLEFxg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1R7EiOx6PRWtfNH42DLEFxg</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ Procreate (iPad) 专属笔刷合集</p>
+                    <p class="text-sm">油画质感：<a href="https://pan.baidu.com/s/1mc1CjHBW4eUAT80WqEOtvg?pwd=tqxi" class="resource-link">https://pan.baidu.com/s/1mc1CjHBW4eUAT80WqEOtvg</a></p>
+                    <p class="text-sm mt-1">霓虹灯：<a href="https://pan.baidu.com/s/1HSahxgHxMvC4Yb2u6nnN2w?pwd=5gfz" class="resource-link">https://pan.baidu.com/s/1HSahxgHxMvC4Yb2u6nnN2w</a></p>
+                    <p class="text-sm mt-1">鞋子线稿：<a href="https://pan.baidu.com/s/11xBZ7Pyh0NlhTf-LLWhmJw?pwd=dzhe" class="resource-link">https://pan.baidu.com/s/11xBZ7Pyh0NlhTf-LLWhmJw</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7.设计素材 -->
+        <section id="asset">
+            <h2 class="category-title">1.7 高端设计素材与源文件</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 10000 张国外前沿 Logo 灵感参考</p>
+                    <a href="https://pan.baidu.com/s/1VCQVxGPxp-4vVmJXMxwLPw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1VCQVxGPxp-4vVmJXMxwLPw?pwd=tang</a>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 液态气泡 / 肌理 / 丝绸 / 酸性科技素材</p>
+                    <p class="text-sm">液态：<a href="https://pan.baidu.com/s/1ab1UkpyviVzarq8RNowRAg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1ab1UkpyviVzarq8RNowRAg</a></p>
+                    <p class="text-sm mt-1">肌理：<a href="https://pan.baidu.com/s/1aPzvnw1FMye3LjcLh2V51w?pwd=tang" class="resource-link">https://pan.baidu.com/s/1aPzvnw1FMye3LjcLh2V51w</a></p>
+                    <p class="text-sm mt-1">酸性：<a href="https://pan.baidu.com/s/1aSAp7epvQ9DS6raJVLgcfA?pwd=tang" class="resource-link">https://pan.baidu.com/s/1aSAp7epvQ9DS6raJVLgcfA</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ Ai 透视网格 / 海报模板 / 文字排版源文件</p>
+                    <p class="text-sm">海报：<a href="https://pan.baidu.com/s/1Ccm6M6bIuG4TzuHD6U0z2A?pwd=tang" class="resource-link">https://pan.baidu.com/s/1Ccm6M6bIuG4TzuHD6U0z2A</a></p>
+                    <p class="text-sm mt-1">排版：<a href="https://pan.baidu.com/s/1f3Aty_9o0R7iu22x3Kiu7w?pwd=tang" class="resource-link">https://pan.baidu.com/s/1f3Aty_9o0R7iu22x3Kiu7w</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 98 本电子设计书链接</p>
+                    <a href="https://pan.baidu.com/s/1UVMJCE2yf1Ha_GPncDZ4dw?pwd=xyh4" class="resource-link">https://pan.baidu.com/s/1UVMJCE2yf1Ha_GPncDZ4dw?pwd=xyh4</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8.C4D 素材类 -->
+        <section id="c4d">
+            <h2 class="category-title">1.8 C4D 安装包与 3D 素材类</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ C4D 2023 / R21 安装包</p>
+                    <p class="text-sm">2023：<a href="https://pan.baidu.com/s/1zb-5vgCaU1R_559CVHpDzA?pwd=ajsb" class="resource-link">https://pan.baidu.com/s/1zb-5vgCaU1R_559CVHpDzA</a></p>
+                    <p class="text-sm mt-1">R21：<a href="https://pan.baidu.com/s/1wBHQ4vCLF2NGxF6FhhItKg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1wBHQ4vCLF2NGxF6FhhItKg</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ C4D 插件合集 / 渲染神器 / 电商场景素材</p>
+                    <p class="text-sm">插件：<a href="https://pan.baidu.com/s/1MEsK1twPbPLHazzLmNJgQg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1MEsK1twPbPLHazzLmNJgQg</a></p>
+                    <p class="text-sm mt-1">渲染：<a href="https://pan.baidu.com/s/1VcDB096cjRuwYxP2dxywTw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1VcDB096cjRuwYxP2dxywTw</a></p>
+                    <p class="text-sm mt-1">场景：<a href="https://pan.baidu.com/s/1mpwgFIA2J7USGnz_X91ZJA?pwd=tang" class="resource-link">https://pan.baidu.com/s/1mpwgFIA2J7USGnz_X91ZJA</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ C4D 宝藏网站</p>
+                    <a href="http://www.modown.cn/" class="resource-link">www.modown.cn</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9.超级样机 -->
+        <section id="mock">
+            <h2 class="category-title">1.9 超级样机与 VI 展现类</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 8000 套 Logo 样机 / VI 样机合集</p>
+                    <p class="text-sm">Logo：<a href="https://pan.baidu.com/s/1ikTh94KLsmIF0vxyHlCk4g?pwd=tang" class="resource-link">https://pan.baidu.com/s/1ikTh94KLsmIF0vxyHlCk4g</a></p>
+                    <p class="text-sm mt-1">VI：<a href="https://pan.baidu.com/s/1f4ThisfAmXwC1U4hfwaBew?pwd=tang" class="resource-link">https://pan.baidu.com/s/1f4ThisfAmXwC1U4hfwaBew</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 包装盒 / 包装样机 / 动态和卷轴样机</p>
+                    <p class="text-sm">包装：<a href="https://pan.baidu.com/s/1NYUfV_xybnw4XmAM3G2K4Q?pwd=tang" class="resource-link">https://pan.baidu.com/s/1NYUfV_xybnw4XmAM3G2K4Q</a></p>
+                    <p class="text-sm mt-1">动态：<a href="https://pan.baidu.com/s/1lYeey66thF9FuXufoc2Xxw?pwd=tang" class="resource-link">https://pan.baidu.com/s/1lYeey66thF9FuXufoc2Xxw</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 书本样机 / 杂志画册样机</p>
+                    <p class="text-sm">书本：<a href="https://pan.baidu.com/s/1TLv3ojtcdwP75hAEDmLVGQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1TLv3ojtcdwP75hAEDmLVGQ</a></p>
+                    <p class="text-sm mt-1">画册：<a href="https://pan.baidu.com/s/1Q8Epx9iNWCLMzLsWTrNkFA?pwd=tang" class="resource-link">https://pan.baidu.com/s/1Q8Epx9iNWCLMzLsWTrNkFA</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10.作品集模板 -->
+        <section id="port">
+            <h2 class="category-title">1.10 设计作品集与简历模板类</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 大厂设计师作品集 / 简历模板合集</p>
+                    <p class="text-sm">作品集：<a href="https://pan.baidu.com/s/1KqvLEi4Uy8nN-raWYV7KtQ?pwd=tang" class="resource-link">https://pan.baidu.com/s/1KqvLEi4Uy8nN-raWYV7KtQ</a></p>
+                    <p class="text-sm mt-1">模板：<a href="https://pan.baidu.com/s/1iz2QR3t4M0ZVTJMGRXFfGg?pwd=tang" class="resource-link">https://pan.baidu.com/s/1iz2QR3t4M0ZVTJMGRXFfGg</a></p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ 作品集灵感网站汇总</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs opacity-80 mt-2">
+                        <p>Ui8: ui8.net</p>
+                        <p>Cargo: cargo.site/Templates</p>
+                        <p>Cofolios: cofolios.com</p>
+                        <p>Notefolio: notefolio.net</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11.CDR 软件 -->
+        <section id="cdr">
+            <h2 class="category-title">1.11 CorelDraw (CDR) 软件全集</h2>
+            <div class="glass-card px-10">
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ CDR 2021 安装包 (提取码: wgah)</p>
+                    <a href="https://pan.baidu.com/s/1a_zJCteYZxTzGujKZDK9LA?pwd=wgah" class="resource-link">https://pan.baidu.com/s/1a_zJCteYZxTzGujKZDK9LA</a>
+                    <p class="text-xs mt-1 text-red-500 font-bold">解压密码：zys666 或 syspsd-666</p>
+                </div>
+                <div class="list-item">
+                    <p class="font-black text-xl mb-3">★ CDR 2017 - 2020 历史版本安装链接</p>
+                    <div class="text-xs space-y-1 mt-2">
+                        <p>2020：<a href="https://tmgbo0vi48.feishu.cn/docx/PqUKdfXLEo99HkxpynccFf6jn7c" class="resource-link">feishu.cn/docx/PqUK...</a></p>
+                        <p>2019：<a href="https://tmgbo0vi48.feishu.cn/docx/NGVBddKjLoHN3xxLEnzcULlCnSd" class="resource-link">feishu.cn/docx/NGVB...</a></p>
+                        <p>2018：<a href="https://tmgbo0vi48.feishu.cn/docx/MRqldVyWQouOkhxvQCkc35Hun0e" class="resource-link">feishu.cn/docx/MRql...</a></p>
+                        <p>2017：<a href="https://tmgbo0vi48.feishu.cn/docx/J8O0dE7HhoKnOdx7W0wcyhqdnTc" class="resource-link">feishu.cn/docx/J8O0...</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 页脚互动 -->
+    <div class="max-w-7xl mx-auto px-6 mb-20">
+        <div class="glass-card p-12 bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-[3rem] text-center shadow-2xl shadow-blue-500/20">
+            <h2 class="text-4xl font-black mb-4">学设计，不走弯路</h2>
+            <p class="mb-10 opacity-80 text-lg">米你课堂开设有 Ui设计、平面设计、商业插画、C4D 等系统设计课程。</p>
+            <div class="flex flex-wrap justify-center gap-5">
+                <div class="bg-white text-blue-700 px-10 py-4 rounded-2xl font-black shadow-xl cursor-pointer hover:bg-gray-100 transition">私信咨询课程</div>
+                <div class="bg-blue-500/30 backdrop-blur-md border border-white/20 px-10 py-4 rounded-2xl font-black cursor-pointer hover:bg-blue-500/50 transition">回复“已领到”</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 text-center opacity-40 text-xs font-medium">
+        <p>© 2025 创想视界 | 内容收集自网络 | 仅供学习参考 | 请支持正版软件</p>
+    </footer>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeIcon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // 锚点平滑滚动
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
