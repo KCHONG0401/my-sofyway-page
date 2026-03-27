@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小糖设计 - 全能设计师素材宝库</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+
+        /* 定义颜色变量 */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(255, 255, 255, 0.3);
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --accent-color: #2563eb;
+        }
+
+        /* 深色模式变量 */
+        [data-theme='dark'] {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(15, 23, 42, 0.9);
+            --accent-color: #60a5fa;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            transition: all 0.5s ease; /* 全局平滑过渡 */
+            background-attachment: fixed;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            transition: background 0.5s ease;
+        }
+
+        .theme-toggle-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        .category-title {
+            border-left: 5px solid var(--accent-color);
+            color: var(--text-main);
+        }
+
+        .download-btn {
+            background: var(--text-main);
+            color: var(--bg-gradient); /* 反色效果 */
+        }
+
+        /* 隐藏百度网盘的提取码小提示 */
+        .pwd-badge {
+            font-size: 12px;
+            background: rgba(100, 100, 100, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 top-0 px-6 py-4 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">糖</div>
+            <span class="text-xl font-bold tracking-tight">小糖素材空间</span>
+        </div>
+        
+        <div class="flex items-center space-x-6">
+            <div class="hidden md:flex space-x-6 font-medium">
+                <a href="#software" class="hover:text-blue-500 transition">软件</a>
+                <a href="#fonts" class="hover:text-blue-500 transition">字体</a>
+                <a href="#plugins" class="hover:text-blue-500 transition">插件</a>
+                <a href="#brushes" class="hover:text-blue-500 transition">笔刷</a>
+            </div>
+            <!-- 主题切换按钮 -->
+            <div id="theme-toggle" class="theme-toggle-btn" title="切换早晚模式">
+                <i class="fas fa-moon text-lg" id="theme-icon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-12 px-6 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">灵感，触手可及</span>
+        </h1>
+        <p class="text-lg opacity-80 max-w-2xl mx-auto mb-8">
+            精心整理的设计师全能包：从 Adobe 2025 到古风笔刷，一站式解决素材需求。
+        </p>
+        
+        <!-- 防骗提醒卡片 -->
+        <div class="max-w-3xl mx-auto bg-red-500/10 border border-red-500/50 p-4 rounded-2xl flex items-start text-left">
+            <i class="fas fa-shield-alt text-red-500 mt-1 mr-3 text-xl"></i>
+            <div class="text-sm">
+                <strong class="text-red-500">安全警示：</strong> 凡是主动加你好友自称“小助理”要钱的都是骗子！请务必通过抖音、腾讯课堂等官方渠道学习。真正的老师昵称均带“米你课堂-”前缀。
+            </div>
+        </div>
+    </header>
+
+    <!-- 资源列表 -->
+    <main class="max-w-7xl mx-auto px-6 pb-24">
+        
+        <!-- ① 软件类 -->
+        <section id="software" class="mb-20">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold category-title pl-4">① 核心设计软件</h2>
+                <span class="text-sm opacity-50">Win/Mac 全覆盖</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- PS 2025 -->
+                <div class="glass-card p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fab fa-adobe text-4xl text-blue-500"></i>
+                        <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-500 text-xs font-bold">最新版</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Photoshop 2025</h3>
+                    <p class="opacity-60 text-sm mb-6">支持Win系统，内含AI创意填充补丁，设计必备神器。</p>
+                    <a href="https://pan.baidu.com/s/1eCA19BGujlWrwvytw-I-yg?pwd=tang" target="_blank" class="block w-full text-center py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">下载资源 <span class="text-xs opacity-70 ml-2">(提取码: tang)</span></a>
+                </div>
+
+                <!-- AI 2025 -->
+                <div class="glass-card p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fas fa-bezier-curve text-4xl text-orange-500"></i>
+                        <span class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-500 text-xs font-bold">2025 Win</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Illustrator 2025</h3>
+                    <p class="opacity-60 text-sm mb-6">更强大的矢量路径处理与3D渲染效果，设计LOGO首选。</p>
+                    <a href="https://pan.baidu.com/s/1Sv4EZj8q4uy3H9MgSTUwRQ?pwd=tang" target="_blank" class="block w-full text-center py-3 rounded-xl bg-orange-600 text-white font-bold hover:bg-orange-700 transition shadow-lg shadow-orange-600/20">下载资源 <span class="text-xs opacity-70 ml-2">(提取码: tang)</span></a>
+                </div>
+
+                <!-- 变清晰软件 -->
+                <div class="glass-card p-8 border-dashed border-2 border-blue-400/30">
+                    <div class="flex justify-between items-center mb-6">
+                        <i class="fas fa-magic text-4xl text-purple-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Upscay 图片变清晰</h3>
+                    <p class="opacity-60 text-sm mb-6">AI无损放大图片神器，拯救你的模糊素材。</p>
+                    <a href="https://pan.baidu.com/s/1OW3DtJAqrHMOyex2m_0H2w?pwd=tang" target="_blank" class="block w-full text-center py-3 rounded-xl border-2 border-current font-bold hover:bg-white/10 transition">立即免费下载</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ② 字体类 -->
+        <section id="fonts" class="mb-20">
+            <div class="flex items-center mb-8">
+                <h2 class="text-2xl font-bold category-title pl-4">② 字体与排版</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="https://pan.baidu.com/s/1wIOQmfvuN5UydJOkws4aIA?pwd=tang" target="_blank" class="glass-card p-4 text-center group">
+                    <i class="fas fa-font text-2xl mb-2 group-hover:scale-110 transition"></i>
+                    <p class="text-sm font-bold">300款古风字体</p>
+                </a>
+                <a href="https://pan.baidu.com/s/1r51u8jEtg3mQKhNNDjCjRg" target="_blank" class="glass-card p-4 text-center group">
+                    <i class="fas fa-check-circle text-2xl mb-2 group-hover:scale-110 transition"></i>
+                    <p class="text-sm font-bold">可商用字体库</p>
+                </a>
+                <a href="https://pan.baidu.com/s/19DZUrik5ncZUj17CU8v16w" target="_blank" class="glass-card p-4 text-center group">
+                    <i class="fas fa-mobile-alt text-2xl mb-2 group-hover:scale-110 transition"></i>
+                    <p class="text-sm font-bold">小米字体包</p>
+                </a>
+                <a href="https://pan.baidu.com/s/1jl2acX0HAvjJmK3nFF9ZEQ?pwd=tang" target="_blank" class="glass-card p-4 text-center group">
+                    <i class="fas fa-language text-2xl mb-2 group-hover:scale-110 transition"></i>
+                    <p class="text-sm font-bold">英文混排字体</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- 互动区 -->
+        <div class="glass-card p-10 bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-[3rem] text-center">
+            <h2 class="text-3xl font-bold mb-4">学设计，不走弯路</h2>
+            <p class="mb-8 opacity-80">米你课堂开设有 UI设计、平面设计、商业插画、C4D 等系统课程</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-white text-blue-700 px-8 py-3 rounded-2xl font-bold shadow-xl">私信老师咨询</div>
+                <div class="bg-blue-500/30 backdrop-blur-md border border-white/20 px-8 py-3 rounded-2xl font-bold">回复“已领到”感谢支持</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center opacity-40 text-xs">
+        <p>© 2025 小糖工作室 | 仅供学习参考 | 请支持正版软件</p>
+    </footer>
+
+    <!-- 主题切换逻辑 -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // 检查本地存储
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            // 更新图标
+            if (theme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                themeToggle.style.background = '#fbbf24'; // 变成太阳的黄色
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                themeToggle.style.background = '#2563eb'; // 恢复蓝色
+            }
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
